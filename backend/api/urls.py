@@ -11,5 +11,5 @@ urlpatterns = [
     # path('tasks/<int:id>/', views.TaskViewDetail.as_view(), name='task'),
 
     path('auth-token/', obtain_auth_token, name='get_token'),
-    # path('user-register/', views.ReqisterView.as_view(), name='register'),
+    path('user-register/', views.ReqisterView.as_view(), name='register'),
 ]
