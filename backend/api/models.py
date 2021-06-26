@@ -8,8 +8,8 @@ class Profile(models.Model):
     user    = models.OneToOneField(User, on_delete=models.CASCADE)
     
 
-    def send_mail(self, subject, message, from_email=None, html_message=None, **kwargs):
-        _send_mail(subject, message, from_email, [self.user.email], html_message, **kwargs)
+    def send_mail(self, subject=None, message=None, from_email=None, html_message=None, **kwargs):
+        _send_mail(subject, message, from_email, [self.user.email], html_message=html_message, **kwargs)
 
 class Task(models.Model):
     user            = models.ForeignKey(User, on_delete=models.CASCADE)     #
@@ -41,4 +41,11 @@ class Task(models.Model):
 
         return super().save(*args, **kwargs)
         
+
+
+class ShareableTask(models.Model):
+    task    = models.OneToOneField(Task, on_delete=models.CASCADE)
+    user    = models.ManyToManyField(User, blank=True)
+    # group   = models.ForeignKey
+
 
