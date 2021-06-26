@@ -2,7 +2,6 @@
   display: grid;
   margin: auto;
   height: 100vh;
-  margin: 1rem;
 }
 .Login{
   border: 1px solid #ddd;
@@ -11,8 +10,13 @@
   padding: 2rem;
   display: grid;
   gap: 1.5rem;
-  width: 50%;
-} 
+  width: 100%;
+}
+@media (min-width: 600px) {
+  .Login{
+    width: 400px;
+  }
+}
 .Login-title{
   text-align: center;
 }
