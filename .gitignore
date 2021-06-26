@@ -12,6 +12,8 @@
 /build
 
 # misc
+Icon?
+.vscode/
 .DS_Store
 .env.local
 .env.development.local
@@ -21,3 +23,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#django
+credentials.py
+__pycache__/
+**/__pycache__
+*.pyc
+*.pyo
+build/
+dist/
+**/migrations
+*.sqlite3
