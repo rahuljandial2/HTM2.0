@@ -8,6 +8,22 @@ from rest_framework.authtoken.models import Token
 
 from .models import Task
 
+class TaskSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(max_length=64, required=False)
+    user = serializers.PrimaryKeyRelatedField(queryset = User.objects.all(), required=False)
+    
+    class Meta:
+        model   = Task
+        fields  = '__all__'
+        # read_only_fields = ('')
+
+    def validate(self, attrs):
+        if not self.instance:
+            if 'name' not in attrs:
+                raise serializers.ValidationError("A Task Reauires a 'name' to be inialized")
+        return attrs
+
+
 
 
 class UserSerializer(serializers.ModelSerializer):
