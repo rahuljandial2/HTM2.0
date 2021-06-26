@@ -70,3 +70,10 @@ class UserSerializer(serializers.ModelSerializer):
 
         return attrs
 
+class UserDetailSerializer(serializers.ModelField):
+
+
+
+    class Meta:
+        models = User
+        fields = ['username', 'email', 'profile']
