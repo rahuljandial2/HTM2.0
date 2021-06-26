@@ -6,7 +6,7 @@ from rest_framework.serializers import CurrentUserDefault
 from rest_framework.authtoken.models import Token
 
 
-from .models import Task
+from .models import Task, Profile
 
 class TaskSerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=64, required=False)
@@ -57,6 +57,8 @@ class UserSerializer(serializers.ModelSerializer):
             user = User.objects.create(username=username, email=email)
             user.set_password(password)
             user.save()
+            Profile.objects.create(user=user)
+
             token, _ = Token.objects.get_or_create(user=user)
             attrs['token'] = token
 

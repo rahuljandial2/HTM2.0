@@ -7,7 +7,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404, render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Task
+from .models import Profile, Task
 from .serializers import UserSerializer, TaskSerializer
 from .permissions import IsOwner
 
@@ -44,6 +44,32 @@ class TaskViewList(APIView):
             serializer.save(user=request.user)
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+
+
+class TaskViewDetail(APIView):
+    permission_classes = [IsOwner]
+
+    def get_object(self, id, user):
+        return get_object_or_404(Task, id=id, user=user)
+
+    def get(self, request, id):
+        task        = self.get_object(id, request.user)
+        serializer  = TaskSerializer(task)
+        return Response(serializer.data)
+
+    def put(self, request, id):
+        task        = self.get_object(id, request.user)
+        serializer  = TaskSerializer(task, data=request.data, context={'request':request})
+
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    def delete(self, request, id):
+        task    = self.get_object(id)
+        task.delete()
+        return Response(data={'messege': f'object sucessfully deleted'}, status=204)
 
 
 

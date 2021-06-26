@@ -9,12 +9,14 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+flag_db = False
+flag_email = True
 from pathlib import Path
 try:
     from . import credentials
 except:
-    pass
+    flag_db = False
+    flag_email = False
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -101,6 +103,9 @@ DATABASES = {
     }
 }
 
+if flag_db:
+    DATABASES = credentials.DATABASES
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -149,8 +154,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-try:
+
+if flag_email:
     EMAIL_HOST_USER = credentials.email[0]
     EMAIL_HOST_PASSWORD = credentials.email[1]
-except:
-    pass
+
+    
