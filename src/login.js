@@ -8,9 +8,9 @@ class Login extends Component {
         <h1 className="Login-title">Todo</h1>
         <TextField className="Login-input" label="Username" variant="outlined" />
         <TextField className="Login-input" label="Password" variant="outlined" />
-        <div className="Login-btn">
-          <Button className="register" color="primary">Register</Button>
-          <Button className="Login" variant="contained" color="primary">Login</Button>
+        <div className="Login-btns">
+          <Button color="primary">Register</Button>
+          <Button variant="contained" color="primary">Login</Button>
         </div>
       </form>
     );
