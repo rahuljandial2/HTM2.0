@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { FormControlLabel, Checkbox } from '@material-ui/core';
+import { Checkbox } from '@material-ui/core';
 import axios from "axios";
 
 class Todo extends Component {
@@ -12,7 +12,7 @@ class Todo extends Component {
     };
   }
   handleCheckbox() {
-    const URL = `http://localhost:8000/api/tasks/${this.props.task.id}/`;
+    const URL = `https://todoapi86.azurewebsites.net/api/tasks/${this.props.task.id}/`;
     const TOKEN = localStorage.getItem('token');
     axios({ method: 'put', url: URL, headers: { "Authorization": `Token ${TOKEN}` }, data: { is_completed: !this.state.isCompleted } })
       .then(data => {
@@ -27,12 +27,11 @@ class Todo extends Component {
     return (
       <div className="Todo">
         <Checkbox
-          id={task.id}
           checked={this.state.isCompleted}
           color="primary"
           onChange={this.handleCheckbox}
         />
-        <label htmlFor={task.id}>{task.name}</label>
+        <label >{task.name}</label>
       </div>
     );
   }

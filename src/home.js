@@ -15,7 +15,7 @@ class Home extends Component {
     }
   }
   getTasks() {
-    const URL = "http://localhost:8000/api/tasks/";
+    const URL = "https://todoapi86.azurewebsites.net/api/tasks/";
     const TOKEN = localStorage.getItem('token');
     axios({ method: 'get', url: URL, headers: { "Authorization": `Token ${TOKEN}` } })
       .then(data => {

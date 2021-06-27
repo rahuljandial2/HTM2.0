@@ -19,7 +19,7 @@ class CreateTask extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    const URL = "http://localhost:8000/api/tasks/";
+    const URL = "https://todoapi86.azurewebsites.net/api/tasks/";
     const TOKEN = localStorage.getItem('token');
     axios({ method: 'post', url: URL, headers: { "Authorization": `Token ${TOKEN}` }, data: { name: this.state.task } })
       .then(() => {

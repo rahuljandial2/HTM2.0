@@ -40,7 +40,7 @@ class Signup extends Component {
     this.setState({ redirect: "/" });
   }
   async register() {
-    const url = "http://127.0.0.1:8000/api/user-register/";
+    const url = "https://todoapi86.azurewebsites.net/api/user-register/";
     const params = {
       username: this.state.username,
       email: this.state.email,

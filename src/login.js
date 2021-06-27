@@ -31,7 +31,7 @@ class Login extends Component {
     this.login();
   }
   async login() {
-    const url = "http://localhost:8000/api/auth-token/";
+    const url = "https://todoapi86.azurewebsites.net/api/auth-token/";
     const params = {
       username: this.state.username,
       password: this.state.password,
