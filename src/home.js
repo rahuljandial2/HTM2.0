@@ -1,6 +1,7 @@
 import { Component } from "react";
 import Todo from './todo.js';
 import { Redirect } from "react-router";
+import { Button } from "@material-ui/core";
 import axios from "axios";
 
 class Home extends Component {
@@ -35,7 +36,10 @@ class Home extends Component {
     if (localStorage.getItem("token")) {
       return (
         <div className="Home">
-          <button onClick={this.handleLogout}>Log Out</button>
+          <nav className="Home-nav">
+            <h1 className="Home-nav-title">Whatodo</h1>
+            <Button variant="contained" color="primary" onClick={this.handleLogout}>Log Out</Button>
+          </nav>
           <h1 className="Home-title">Todo List</h1>
           <div className="Home-tasks">
             {this.state.tasks.map(task => <Todo key={task.id} task={task} />)}

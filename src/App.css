@@ -24,6 +24,16 @@
   display: flex;
   justify-content: space-between;
 }
+.Home-nav{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 1rem;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+}
+.Home-nav-title{
+  margin: 0;
+}
 .Home-title{
   text-align: center;
 }
