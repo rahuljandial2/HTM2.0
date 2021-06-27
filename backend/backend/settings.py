@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 flag_db = False
 flag_email = True
+import os
 from pathlib import Path
 try:
     from . import credentials
+
 except:
     flag_db = False
     flag_email = False
@@ -97,13 +99,28 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db2.sqlite3',
+try:
+    DATABASES = {
+        'default': {
+            'ENGINE' : 'django_cockroachdb',
+            'USER' : os.environ.get('USER'),                                                  #
+            'PASSWORD': os.environ.get('PASSWORD'),                                     #
+            'HOST' : 'free-tier6.gcp-asia-southeast1.cockroachlabs.cloud',      #
+            'PORT' : 26257,
+            'NAME' : os.environ.get('NAME'),                                    #
+            'OPTIONS': {
+                'sslmode': 'verify-full',
+                'sslrootcert':BASE_DIR / 'backend/cc-ca.crt',
+            },
+        }
     }
-}
+except:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db2.sqlite3',
+        }
+    }
 
 if flag_db:
     DATABASES = credentials.DATABASES
