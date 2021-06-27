@@ -25,6 +25,11 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
 
 class UserSerializer(serializers.ModelSerializer):
     username = serializers.CharField(write_only=True)
@@ -70,3 +75,10 @@ class UserSerializer(serializers.ModelSerializer):
 
         return attrs
 
+class UserDetailSerializer(serializers.ModelField):
+
+
+
+    class Meta:
+        models = User
+        fields = ['username', 'email', 'profile']
