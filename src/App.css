@@ -24,3 +24,16 @@
   display: flex;
   justify-content: space-between;
 }
+.Home-title{
+  text-align: center;
+}
+.Home-tasks{
+  width: 500px;
+  margin: 1rem auto;
+}
+.Todo{
+  background-color: #ddd;
+  margin-bottom: 0.8rem;
+  padding-left: 0.8rem;
+  border-radius: 3px;
+}
