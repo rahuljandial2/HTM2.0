@@ -2,6 +2,7 @@ import { Component } from "react";
 import Todo from './todo.js';
 import { Redirect } from "react-router";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 class Home extends Component {
@@ -19,7 +20,6 @@ class Home extends Component {
     axios({ method: 'get', url: URL, headers: { "Authorization": `Token ${TOKEN}` } })
       .then(data => {
         this.setState({ tasks: data.data });
-        console.log(this.state.tasks);
       })
       .catch((err) => {
         console.log(err);
@@ -38,6 +38,7 @@ class Home extends Component {
         <div className="Home">
           <nav className="Home-nav">
             <h1 className="Home-nav-title">Whatodo</h1>
+            <Link to='/create-task'><Button variant="contained" color="primary">Create Task</Button></Link>
             <Button variant="contained" color="primary" onClick={this.handleLogout}>Log Out</Button>
           </nav>
           <h1 className="Home-title">Todo List</h1>
