@@ -15,7 +15,7 @@ class Home extends Component {
   }
   getTasks() {
     const URL = "http://localhost:8000/api/tasks/";
-    const TOKEN = "5cf6991a8f0d44846ee6742e4b2cfab8dda151ba";
+    const TOKEN = localStorage.getItem('token');
     axios({ method: 'get', url: URL, headers: { "Authorization": `Token ${TOKEN}` } })
       .then(data => {
         this.setState({ tasks: data.data });

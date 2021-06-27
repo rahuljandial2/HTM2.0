@@ -29,9 +29,6 @@ class Login extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.login();
-    this.setState({
-      password: "123456789012345678901234567890"
-    });
   }
   async login() {
     const url = "http://localhost:8000/api/auth-token/";
