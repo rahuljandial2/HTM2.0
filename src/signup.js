@@ -1,24 +1,32 @@
 import { Component } from "react";
 import { Button, TextField } from "@material-ui/core";
 import axios from "axios";
-import { Redirect, Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
-class Login extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleUsername = this.handleUsername.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
     this.state = {
       username: "",
-      password: ""
+      email: "",
+      password: "",
+      redirect: null
     };
   }
 
   handleUsername(event) {
     this.setState({
       username: event.target.value
+    });
+  }
+  handleEmail(event) {
+    this.setState({
+      email: event.target.value
     });
   }
   handlePassword(event) {
@@ -28,15 +36,14 @@ class Login extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    this.login();
-    this.setState({
-      password: "123456789012345678901234567890"
-    });
+    this.register();
+    this.setState({ redirect: "/" });
   }
-  async login() {
-    const url = "http://localhost:8000/api/auth-token/";
+  async register() {
+    const url = "http://127.0.0.1:8000/api/user-register/";
     const params = {
       username: this.state.username,
+      email: this.state.email,
       password: this.state.password,
     };
     await axios.post(url, params)
@@ -48,16 +55,13 @@ class Login extends Component {
       .catch(() => {
         console.log("Something went wrong while logging in!!");
       });
-    this.forceUpdate();
   }
   render() {
-    if (localStorage.getItem("token")) {
-      return (
-        <Redirect to="/home-page" />
-      );
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
     }
     return (
-      <form className="Login" onSubmit={this.handleSubmit}>
+      <form className="Login" onSubmit={this.handleSubmit} autoComplete={"off"}>
         <h1 className="Login-title">Whatodo</h1>
         <TextField className="Login-input"
           required
@@ -68,18 +72,25 @@ class Login extends Component {
           onChange={this.handleUsername} />
         <TextField className="Login-input"
           required
+          value={this.state.email}
+          type="email"
+          label="Email"
+          variant="outlined"
+          onChange={this.handleEmail} />
+        <TextField className="Login-input"
+          required
           value={this.state.password}
           type="password"
           label="Password"
           variant="outlined"
           onChange={this.handlePassword} />
         <div className="Login-btns">
-          <Link to='/signup'><Button color="primary">Register Here</Button></Link>
-          <Button variant="contained" color="primary" type="submit">Login</Button>
+          <Link to='/'><Button color="primary">Login Here</Button></Link>
+          <Button variant="contained" color="primary" type="submit">Sign Up</Button>
         </div>
       </form>
     );
   }
 }
 
-export default Login;
+export default Signup;
