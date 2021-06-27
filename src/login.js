@@ -58,7 +58,7 @@ class Login extends Component {
     }
     return (
       <form className="Login" onSubmit={this.handleSubmit}>
-        <h1 className="Login-title">Todo</h1>
+        <h1 className="Login-title">Whatodo</h1>
         <TextField className="Login-input"
           required
           value={this.state.username}
