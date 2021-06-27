@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
 
-from . import apis
+from . import apis, views
 
 
 urlpatterns = [
@@ -11,4 +11,6 @@ urlpatterns = [
     path('user-details/', apis.UserDetailView.as_view(), name='all-users'),
     path('auth-token/', obtain_auth_token, name='get_token'),
     path('user-register/', apis.ReqisterView.as_view(), name='register'),
+
+    path('verify/<str:_key>/', views.varification_view, name='verify'),
 ]

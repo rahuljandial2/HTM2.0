@@ -1,12 +1,13 @@
 from django.db import models
 from django.db.models import fields
 from django.contrib.auth.models import User
+from django.urls.conf import include
 from rest_framework import serializers
 from rest_framework.serializers import CurrentUserDefault
 from rest_framework.authtoken.models import Token
 
 
-from .models import Task, Profile
+from .models import Task, Profile, VerifyKey
 
 class TaskSerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=64, required=False)
@@ -61,8 +62,16 @@ class UserSerializer(serializers.ModelSerializer):
 
             user = User.objects.create(username=username, email=email)
             user.set_password(password)
+            user.is_active = False
             user.save()
-            Profile.objects.create(user=user)
+            profile = Profile.objects.create(user=user)
+            key     = VerifyKey.objects.create(user=user)
+            try:
+                profile.send_activation_mail()
+            except:
+                user.is_active = True
+                user.save()
+            
 
             token, _ = Token.objects.get_or_create(user=user)
             attrs['token'] = token
@@ -74,11 +83,3 @@ class UserSerializer(serializers.ModelSerializer):
 
 
         return attrs
-
-class UserDetailSerializer(serializers.ModelField):
-
-
-
-    class Meta:
-        models = User
-        fields = ['username', 'email', 'profile']
