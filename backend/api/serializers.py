@@ -25,6 +25,11 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
 
 class UserSerializer(serializers.ModelSerializer):
     username = serializers.CharField(write_only=True)
