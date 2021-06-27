@@ -74,7 +74,7 @@ http http://127.0.0.1:8000/api/task/ 'Authorization: Token <token>'
 
 #### List Task
 ```sh
-http http://127.0.0.1:8000/api/task/<id> 'Authorization: Token <token>' 
+http http://127.0.0.1:8000/api/task/<id>/ 'Authorization: Token <token>' 
 #response
     {
         Task OBJ SEE above
@@ -84,7 +84,7 @@ http http://127.0.0.1:8000/api/task/<id> 'Authorization: Token <token>'
 
 #### Update Task
 ```sh
-http PUT http://127.0.0.1:8000/api/task/<id> 'Authorization: Token <token>' {TASK}
+http PUT http://127.0.0.1:8000/api/task/<id>/ 'Authorization: Token <token>' {TASK}
 #response
     {
         UPSATED Task OBJ SEE above
@@ -94,7 +94,7 @@ http PUT http://127.0.0.1:8000/api/task/<id> 'Authorization: Token <token>' {TAS
 
 #### DELETE Task
 ```sh
-http DELETEhttp://127.0.0.1:8000/api/task/<id> 'Authorization: Token <token>' 
+http DELETEhttp://127.0.0.1:8000/api/task/<id>/ 'Authorization: Token <token>' 
 #response
     CODE:204
 
